@@ -90,7 +90,7 @@ Typical installation time is approximately 10–20 minutes on a standard worksta
 
 ## Demo
 
-The example prediction command provided below can be used to run TS-CatFormer on the supplied ZENzyme-19 data.
+The example prediction command provided below can be used to run TS-CatFormer on the supplied ZENzyme-18 data.
 
 The expected output is a CSV file containing the model predictions for the input enzyme–reaction pairs.
 
@@ -103,7 +103,7 @@ python scripts/predict_main.py \
   experiment=predict_crf \
   model.p_in_dim=1024 \
   data.embedding.sequence_output=t5_global_em \
-  predict.output_csv_path=ZENzyme-19_out.csv \
+  predict.output_csv_path=ZENzyme-18_out.csv \
   checkpoint.path=checkpoints/crf_train_enzymecage_global/3/epoch-18-test_sr_at_10-0.7045.ckpt
 ```
 
