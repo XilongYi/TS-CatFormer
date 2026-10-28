@@ -16,15 +16,15 @@ data:
   csv:
     train_csv_path: null
     valid_csv_path: null
-    inference_csv_path: data/ZENzyme-19/ZENzyme-19.csv
-    reaction_csv_path: data/ZENzyme-19/reaction2idx.csv
-    substrate_csv_path: data/ZENzyme-19/substrate2idx.csv
+    inference_csv_path: data/ZENzyme-18/ZENzyme-18.csv
+    reaction_csv_path: data/ZENzyme-18/reaction2idx.csv
+    substrate_csv_path: data/ZENzyme-18/substrate2idx.csv
     product_csv_path: null
-    sequence_csv_path: data/ZENzyme-19/protein2idx.csv
+    sequence_csv_path: data/ZENzyme-18/protein2idx.csv
   paths:
     tmp_dir: data/tmp/crf_zen19
-    complex_pocket_folder: data/ZENzyme-19/pocket
-    protein_only_folder: data/ZENzyme-19/pocket
+    complex_pocket_folder: data/ZENzyme-18/pocket
+    protein_only_folder: data/ZENzyme-18/pocket
     ligand_folder: null
   embedding:
     save_dir_base: data/tmp/embedding
@@ -61,7 +61,7 @@ seed:
 model:
   freeze_graphormer: false
 predict:
-  output_csv_path: data/ZENzyme-19/predictions.csv
+  output_csv_path: data/ZENzyme-18/predictions.csv
 mode:
   name: crf
   task: catalytic_reaction_feasibility_prediction
