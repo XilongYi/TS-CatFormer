@@ -1,0 +1,8 @@
+val_handler:
+  _target_: src.routine.handlers.energy.EnergyValHandler
+
+predict_handler:
+  _target_: src.routine.handlers.energy.EnergyPredictHandler
+
+step_logger:
+  _target_: src.routine.handlers.energy.EnergyStepLogger

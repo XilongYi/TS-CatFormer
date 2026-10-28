@@ -1,0 +1,86 @@
+# @package _global_
+defaults:
+  - override /routine@_global_.routine: train
+  - override /dataset@_global_.dataset: complex_pocket_seq_data
+  - override /dataloader@_global_.dataloader: multi_modal_loader
+  - override /dataset/merge_sdf_pdb@_global_.dataset.merge_sdf_pdb: merge_sdf_pdb_by_residues_near_ligand
+  - override /dataset/add_asites_label@_global_.dataset.add_asites_label: noop_add
+  - override /dataset/get_valid_item@_global_.dataset.get_valid_item: asites_crf
+  - override /dataset/assign_label2x@_global_.dataset.assign_label2x: crf
+  - override /model@_global_.model: ts_catformer
+  - override /model/task_head@_global_.model.task_head: crf
+  - override /routine/handlers@_global_.routine.handlers: crf
+  - _self_
+
+
+  
+
+experiment_name: crf_train
+data:
+  csv:
+    train_csv_path: data/ESIBANK/random_split/esibank_random_split_train.csv
+    valid_csv_path: data/ESIBANK/random_split/esibank_random_split_val.csv
+    inference_csv_path: null
+    reaction_csv_path: data/ESIBANK/reaction2idx.csv
+    substrate_csv_path: data/ESIBANK/substrate2idx.csv
+    product_csv_path: data/ESIBANK/product2idx.csv
+    sequence_csv_path: data/ESIBANK/protein2idx.csv
+  paths:
+    tmp_dir: data/tmp/crf_esibank_random_split
+    complex_pocket_folder: data/ESIBANK/pocket
+    protein_only_folder:
+      - data/ESIBANK/pocket
+    ligand_folder: data/ESIBANK/ligand
+  embedding:
+    save_dir_base: data/tmp/embedding
+    dataset_name: esibank
+    sequence_output: t5_clip_em # t5_global_em  # 
+    load_substrate_embedding: true
+    load_product_embedding: false
+    load_sequence_embedding: true
+    load_pocket_embedding: true
+    load_reaction_fp_embedding: false
+    load_reaction_embedding: true
+    fingerprint:
+      rxn_fp_emb_path: null
+      rxn_fp_mask_path: null
+  dataset_mode: complex_pocket_seq
+run:
+  max_epochs: 100
+  is_train: true
+  batch_size: 4
+
+early_stop:
+  enabled: true
+  patience: 15
+
+grad_guard:
+  enabled: true
+
+optimization:
+  peak_lr: 1.5e-04
+  weight_decay: 1.0e-05
+  warmup_ratio: 0.05
+  end_lr: 1.0e-09
+
+ts_reaction:
+  selected_key: 2d_mask_pretrain_plus_ts
+  filter_valid: false
+  
+checkpoint:
+  path: null
+  mode: weights
+seed:
+  values: [0]
+  deterministic: false
+model:
+  freeze_graphormer: false
+mode:
+  name: crf
+  task: catalytic_reaction_feasibility_prediction
+  flags:
+    if_reload: true
+  monitor:
+    metric: val_auc_crf
+    mode: max
+    filename: rpre-best-2511-{epoch:02d}-{val_auc_crf:.4f}

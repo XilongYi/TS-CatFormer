@@ -1,0 +1,45 @@
+
+defaults:
+  - callback: default
+  - dataloader: default
+  - dataset: default
+  - logger: tb_logger
+  - trainer: single_gpu
+  - routine: train
+  - optim: adamw_warmup_cosine
+  - model: ts_catformer
+  - mode: default
+  - experiment: train_crf_wo
+  - _self_
+  
+hydra:
+  run:
+    dir: ${hydra:runtime.cwd}/hydra_outputs/${experiment_name}/seed_${current_seed}/${now:%Y-%m-%d_%H-%M-%S}
+
+project_name: Gdiffusion
+current_seed: 0
+
+seed:
+  values: [0]
+  deterministic: false
+
+early_stop:
+  enabled: false
+  monitor: ${mode.monitor.metric}
+  mode: ${mode.monitor.mode}
+  patience: 15
+  min_delta: 0.0
+  check_on_train_epoch_end: false
+
+grad_guard:
+  enabled: false
+  stop_on_exploding: true
+  stop_on_vanishing: true
+  explode_norm_threshold: 1000000.0
+  vanish_norm_threshold: 1.0e-12
+  check_finite: true
+
+dataset:
+  n_jobs: 26
+
+work_path: .

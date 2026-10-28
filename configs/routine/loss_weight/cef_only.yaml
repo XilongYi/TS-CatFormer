@@ -1,0 +1,5 @@
+defaults:
+  - default
+  - _self_
+g_score: 0
+g_score_pos: 0

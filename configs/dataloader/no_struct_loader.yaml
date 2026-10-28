@@ -1,0 +1,10 @@
+defaults:
+  - default
+  - _self_
+  
+_target_: src.dataloader.global_pocket_seq_loader.build_global_pocket_seq_loader
+_partial_: true
+collate_fn_no_struct:
+  _target_: src.dataloader.utils.collate_fn.collate_fn_no_struct
+  _partial_: true
+  ts_key: ${ts_reaction.selected_key}

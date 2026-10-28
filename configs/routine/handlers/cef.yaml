@@ -1,0 +1,8 @@
+val_handler:
+  _target_: src.routine.handlers.cef.CEFValHandler
+
+predict_handler:
+  _target_: src.routine.handlers.cef.CEFPredictHandler
+
+step_logger:
+  _target_: src.routine.handlers.cef.CEFStepLogger

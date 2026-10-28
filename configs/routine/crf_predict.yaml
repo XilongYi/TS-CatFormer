@@ -1,0 +1,15 @@
+defaults:
+  - _self_
+
+_target_: src.routine.crf_predict.TSCatformerCRFPredictLit
+_partial_: true
+
+loader_builder: ${dataloader}
+dataset: ${dataset}
+model: ${model}
+
+input_csv_path: ${data.csv.inference_csv_path}
+output_csv_path: ${predict.output_csv_path}
+
+output_score_col: Score
+target_col: Target

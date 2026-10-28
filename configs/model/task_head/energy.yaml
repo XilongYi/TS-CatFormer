@@ -1,0 +1,6 @@
+defaults:
+- atom_type_head: default
+- vina_score_head: default
+- _self_
+
+_target_: src.model.task_head.energy.EnergyHead

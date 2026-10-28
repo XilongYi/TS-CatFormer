@@ -1,0 +1,22 @@
+
+n_intra_encoder: 3
+n_pocket_encoder: 1
+n_inter_encoder: 3
+freeze_graphormer: false
+
+num_heads: 8
+hidden_dim: 128
+attention_dropout_rate: 0.1
+dropout_rate: 0.1
+intput_dropout_rate: 0.0
+ffn_scale: 4
+ffn_dim: 512
+node_feat_size: 1
+edge_feat_size: 1
+angle_feat_size: 0
+rbf_K: 128
+rbf_cutoff: 10.0
+aa_in_dim: 1024
+p_in_dim: 128
+ts_in_dim: 600
+substrate_in_dim: 768

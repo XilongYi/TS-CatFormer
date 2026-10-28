@@ -1,0 +1,5 @@
+_target_: src.model.task_head.heads.vina_score_head.VinaScoreHead
+hidden_dim: ${model.hidden_dim}
+node_featurizer: ${dataset.node_featurizer}
+dropout_rate: ${model.dropout_rate}
+mode_name: ${mode.name}

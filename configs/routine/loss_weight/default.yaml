@@ -1,0 +1,6 @@
+
+g_score: 1.0
+g_score_pos: 0.0
+cef_loss: 0.1
+atom_loss: 1.0
+crf_loss: 1.0

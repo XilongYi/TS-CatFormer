@@ -1,0 +1,58 @@
+seed: 0
+use_cuda: true
+device: gpu
+data:
+  source_type: single_csv
+  data_path: data/TS/uspto/remapped_USPTO_FULL_chemtorch.cleaned.csv
+  train_ratio: 0.8
+  val_ratio: 0.1
+  column_mapping:
+    smiles: smiles
+    ts_label: dE0
+  dropna: true
+dataset:
+  precompute_all: true
+  cache: true
+  cache_path: data/tmp/ts_graphs
+  use_bond_change_label: true
+  cache_name_prefix: train_2d_mask_pretrain_only
+dataloader:
+  batch_size: 32
+  num_workers: 0
+  pin_memory: true
+  shuffle_train: false
+model:
+  encoder_type: directed_edge
+  hidden_channels: 1200
+  depth: 6
+  residual: true
+  block_dropout: 0.1
+  head_hidden_size: 600
+  head_num_hidden_layers: 0
+  head_dropout: 0.1
+  pool: add
+  bond_mask_rate: 0.5
+  bond_mask_num_classes: 31
+  bond_mask_dropout: 0.1
+task:
+  type: bond_change_train
+  epochs: 20
+  patience: 100
+  min_delta: 0.01
+  clip_grad_norm: true
+  clip_grad_norm_value: 1.0
+  checkpoint_dir: checkpoints/ts_encoder/2d_mask_pretrain_only
+  save_model_parameters: true
+optimizer:
+  lr: 0.001
+  weight_decay: 0.01
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  amsgrad: false
+scheduler:
+  num_warmup_steps: 10
+  num_cycles: 0.5
+loss:
+  reduction: mean

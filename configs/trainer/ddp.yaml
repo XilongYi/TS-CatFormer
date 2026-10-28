@@ -1,0 +1,27 @@
+_target_: pytorch_lightning.Trainer
+
+max_epochs: ${run.max_epochs}
+
+# Device settings: let Lightning choose GPU or CPU; use devices=auto for multi-GPU runs
+accelerator: auto
+devices: auto
+
+# Instantiate DDPStrategy via _target_
+strategy:
+  _target_: pytorch_lightning.strategies.DDPStrategy
+  find_unused_parameters: true
+
+use_distributed_sampler: false
+
+# Training behavior
+precision: 16-mixed
+accumulate_grad_batches: 1
+log_every_n_steps: 10
+check_val_every_n_epoch: 1
+
+# Injected by code
+logger: null
+callbacks: null
+#############################################
+# gradient_clip_val: 1.0
+# gradient_clip_algorithm: norm

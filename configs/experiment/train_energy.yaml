@@ -1,0 +1,73 @@
+# @package _global_
+defaults:
+  - override /routine@_global_.routine: train
+  - override /dataset@_global_.dataset: complex_pocket_seq_data
+  - override /dataloader@_global_.dataloader: conformation_loader
+  - override /dataset/merge_sdf_pdb@_global_.dataset.merge_sdf_pdb: merge_sdf_pdb_by_rdkit
+  - override /dataset/add_asites_label@_global_.dataset.add_asites_label: noop_add
+  - override /dataset/get_valid_item@_global_.dataset.get_valid_item: energy
+  - override /dataset/assign_label2x@_global_.dataset.assign_label2x: energy
+  - override /model@_global_.model: ts_catformer
+  - override /model/task_head@_global_.model.task_head: energy
+  - override /routine/handlers@_global_.routine.handlers: energy
+  - override /model/complex_encoder/get_inter_edge_dense@_global_.model.complex_encoder.get_inter_edge_dense: energy
+  - override /model/complex_encoder@_global_.model.complex_encoder: edge_feat_0
+  - _self_
+
+experiment_name: energy_
+data:
+  csv:
+    train_csv_path: data/ENERGY/general_PL_2020_train.csv
+    valid_csv_path: data/ENERGY/general_PL_2020_valid.csv
+    inference_csv_path: null
+    reaction_csv_path: null
+    substrate_csv_path: null
+    sequence_csv_path: null
+  paths:
+    tmp_dir: data/tmp/energy_rcsb
+    complex_pocket_folder: data/ENERGY/pocket
+    protein_only_folder: data/ENERGY/pocket
+    ligand_folder: data/ENERGY/ligand
+  embedding:
+    save_dir_base: data/tmp/embedding
+    dataset_name: energy
+    sequence_output: sequence_em
+    load_substrate_embedding: false
+    load_product_embedding: false
+    load_sequence_embedding: false
+    load_pocket_embedding: false
+    load_reaction_fp_embedding: false
+    load_reaction_embedding: false
+    fingerprint:
+      rxn_fp_emb_path: null
+      rxn_fp_mask_path: null
+  dataset_mode: complex_only
+run:
+  max_epochs: 100
+  is_train: true
+  batch_size: 4
+optimization:
+  peak_lr: 7.5e-04
+  weight_decay: 1.0e-05
+  warmup_ratio: 0.05
+  end_lr: 1.0e-09
+ts_reaction:
+  selected_key: null
+  filter_valid: false
+checkpoint:
+  path: null
+  mode: weights
+seed:
+  values: [0]
+  deterministic: false
+model:
+  freeze_graphormer: false
+mode:
+  name: energy
+  task: binding_energy_regression
+  flags:
+    if_reload: true
+  monitor:
+    metric: vl_true
+    mode: min
+    filename: energy-best-2511-{epoch:02d}-{vl_true:.4f}

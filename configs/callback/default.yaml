@@ -1,0 +1,9 @@
+_target_: pytorch_lightning.callbacks.ModelCheckpoint
+
+monitor: ${mode.monitor.metric}
+mode: ${mode.monitor.mode}
+filename: ${mode.monitor.filename}
+dirpath: ./checkpoints/${experiment_name}/seed_${current_seed}
+save_top_k: 4
+save_last: true
+every_n_epochs: 1

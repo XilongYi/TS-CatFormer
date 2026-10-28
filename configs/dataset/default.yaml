@@ -1,0 +1,40 @@
+column_keys:
+  protein_id: Protein_id
+  substrate_id: Substrate_id
+  label_key: label
+  pic50_key: pIC50
+  sites_key: Active_Sites
+  sequence_key: Protein
+  reaction_key: Reaction
+
+tmp_dir: ${data.paths.tmp_dir}
+complex_pocket_folder: ${data.paths.complex_pocket_folder}
+protein_only_folder: ${data.paths.protein_only_folder}
+ligand_folder: ${data.paths.ligand_folder}
+
+n_jobs: 16
+istrain: ${run.is_train}
+
+csv_paths: ${data.csv}
+  
+
+embedding_config:
+  save_dir_base: ${data.embedding.save_dir_base}
+  dataset_name: ${data.embedding.dataset_name}
+  sequence_output: ${data.embedding.sequence_output}
+  load_substrate_embedding: ${data.embedding.load_substrate_embedding}
+  load_product_embedding: ${data.embedding.load_product_embedding}
+  load_sequence_embedding: ${data.embedding.load_sequence_embedding}
+  load_pocket_embedding: ${data.embedding.load_pocket_embedding}
+  load_reaction_fp_embedding: ${data.embedding.load_reaction_fp_embedding}
+  load_reaction_embedding: ${data.embedding.load_reaction_embedding}
+  fingerprint:
+    rxn_fp_emb_path: ${data.embedding.fingerprint.rxn_fp_emb_path}
+    rxn_fp_mask_path: ${data.embedding.fingerprint.rxn_fp_mask_path}
+
+  
+
+if_reload: ${mode.flags.if_reload}
+work_path: ${..work_path}
+use_ts_reaction: ${ts_reaction.selected_key}
+filter_ts_valid: ${ts_reaction.filter_valid}

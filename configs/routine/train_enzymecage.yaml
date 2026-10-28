@@ -1,0 +1,22 @@
+defaults:
+  - loss_weight: default
+  - handlers: null
+  - _self_
+
+_target_: src.routine.enzymecage_lit.TSCatformerLit
+_partial_: true
+val_handler: ${routine.handlers.val_handler}
+predict_handler: ${routine.handlers.predict_handler}
+step_logger: ${routine.handlers.step_logger}
+optimizer_builder: ${optim}
+peak_lr: ${optimization.peak_lr}
+weight_decay: ${optimization.weight_decay}
+warmup_ratio: ${optimization.warmup_ratio}
+end_lr: ${optimization.end_lr}
+bce_w_neg: 1.0
+bce_w_pos: 1.0
+valid_seq_csv: ${data.csv.valid_csv_path}
+valid_query_col: RHEA_ID
+valid_label_col: label
+valid_target_col: Target
+valid_candidate_col: Protein_id

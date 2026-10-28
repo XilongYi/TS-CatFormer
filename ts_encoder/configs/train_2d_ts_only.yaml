@@ -1,0 +1,58 @@
+seed: 0
+use_cuda: true
+device: gpu
+data:
+  source_type: presplit_coordinate
+  data_folder: data/TS/rdb7
+  train_coordinate: train_mace_mp_ts.npz
+  val_coordinate: val_mace_mp_ts.npz
+  test_coordinate: test_mace_mp_ts.npz
+  column_mapping:
+    smiles: smiles
+    ts_label: dE0
+dataset:
+  precompute_all: true
+  cache: true
+  cache_path: data/tmp/ts_graphs
+  use_bond_change_label: false
+  cache_name_prefix: train_2d_ts_only
+dataloader:
+  batch_size: 50
+  num_workers: 0
+  pin_memory: true
+  shuffle_train: false
+model:
+  encoder_type: directed_edge
+  hidden_channels: 600
+  depth: 6
+  residual: true
+  block_dropout: 0.1
+  head_hidden_size: 600
+  head_num_hidden_layers: 0
+  head_dropout: 0.1
+  pool: add
+  bond_mask_rate: 0.0
+task:
+  type: regression_train
+  epochs: 100
+  patience: 100
+  min_delta: 0.01
+  clip_grad_norm: true
+  clip_grad_norm_value: 1.0
+  checkpoint_dir: checkpoints/ts_encoder/2d_ts_only
+  load_model_path: null
+  use_pretrained_model: false
+  save_model_parameters: true
+optimizer:
+  lr: 0.001
+  weight_decay: 0.01
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  amsgrad: false
+scheduler:
+  num_warmup_steps: 10
+  num_cycles: 0.5
+loss:
+  reduction: sum

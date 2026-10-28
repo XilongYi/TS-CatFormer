@@ -1,0 +1,2 @@
+_target_: src.dataset.modules.get_valid_item.get_valid_item_energy
+_partial_: true

@@ -1,0 +1,9 @@
+defaults:
+  - default
+  - pocket_interaction_layer: default
+  - complex_encoder: default
+  - task_head: null
+
+  - _self_
+_target_: src.model.ts_catformer.TSCatformer
+complex_feat_layer: ${model.complex_encoder}

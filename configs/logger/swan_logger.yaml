@@ -1,0 +1,4 @@
+_target_: swanlab.integration.pytorch_lightning.SwanLogger
+save_dir: swanlab_logs
+project: ${project_name}
+name: ${mode.name}

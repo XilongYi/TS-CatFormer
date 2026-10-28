@@ -1,0 +1,19 @@
+from abc import ABC, abstractmethod
+
+class ValHandler(ABC):
+    @abstractmethod
+    def on_epoch_start(self, pl_module): ...
+    @abstractmethod
+    def collect(self, pl_module, batch, y_hat, dataloader_idx=None): ...
+    @abstractmethod
+    def on_epoch_end(self, pl_module): ...
+
+class PredictHandler(ABC):
+    @abstractmethod
+    def predict(self, pl_module, batch, y_hat): ...
+
+class StepLogHandler(ABC):
+    @abstractmethod
+    def train_step_log(self, pl_module, losses_list, batch_size): ...
+    @abstractmethod
+    def val_step_log(self, pl_module, losses_list, batch_size): ...

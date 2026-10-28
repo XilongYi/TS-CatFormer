@@ -1,0 +1,10 @@
+_target_: src.model.pocket_interaction_layer.pocket_interaction.PocketInteractionLayer
+n_intra_encoder: ${model.n_intra_encoder}
+n_pocket_encoder: ${model.n_pocket_encoder}
+n_inter_encoder: ${model.n_inter_encoder}
+hidden_dim: ${model.hidden_dim}
+ffn_dim: ${model.ffn_dim}
+dropout_rate: ${model.dropout_rate}
+attention_dropout_rate: ${model.attention_dropout_rate}
+num_heads: ${model.num_heads}
+

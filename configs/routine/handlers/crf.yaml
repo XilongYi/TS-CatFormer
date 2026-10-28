@@ -1,0 +1,8 @@
+val_handler:
+  _target_: src.routine.handlers.crf.CRFValHandler
+
+predict_handler:
+  _target_: src.routine.handlers.crf.CRFPredictHandler
+
+step_logger:
+  _target_: src.routine.handlers.crf.CRFStepLogger

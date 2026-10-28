@@ -1,0 +1,10 @@
+base_config: ts_encoder/configs/train_2d_ts_only.yaml
+smiles_column: Reaction
+reaction_column: Reaction
+index_column: r_idx
+dtype: float16
+mask_dtype: uint8
+strict_rest_shape: true
+verbose: true
+use_ptr_if_available: true
+keep_duplicates_as_list: true

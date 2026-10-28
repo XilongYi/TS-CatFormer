@@ -1,0 +1,10 @@
+defaults:
+  - default
+  - _self_
+  
+_target_: src.dataloader.complex_only_loader.build_complex_only_loader
+_partial_: true
+collate_fn_conformation_data:
+  _target_: src.dataloader.utils.collate_fn.collate_fn_conformation_data
+  _partial_: true
+  ts_key: ${ts_reaction.selected_key}

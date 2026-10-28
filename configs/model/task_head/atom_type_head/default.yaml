@@ -1,0 +1,4 @@
+_target_: src.model.task_head.heads.atom_type_head.AtomHead
+hidden_dim: ${model.hidden_dim}
+node_feat_size: 58 # 29 atom types with one-hot encoding for both ligand and pocket
+dropout_rate: ${model.dropout_rate}

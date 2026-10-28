@@ -1,0 +1,2 @@
+_target_: src.model.encoder.encoder_module.get_inter_edge_dense.get_no_energy_inter_edge_dense
+_partial_: true

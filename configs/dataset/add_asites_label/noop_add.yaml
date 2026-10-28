@@ -1,0 +1,2 @@
+_target_: src.dataset.modules.add_asites_label.noop_add_asites_labels
+_partial_: true 

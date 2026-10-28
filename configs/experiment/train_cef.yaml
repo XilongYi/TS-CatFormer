@@ -1,0 +1,73 @@
+# @package _global_
+defaults:
+  - override /routine@_global_.routine: train
+  - override /dataset@_global_.dataset: complex_pocket_seq_data
+  - override /dataloader@_global_.dataloader: conformation_loader
+  - override /dataset/merge_sdf_pdb@_global_.dataset.merge_sdf_pdb: merge_sdf_pdb_by_residues_near_ligand
+  - override /dataset/add_asites_label@_global_.dataset.add_asites_label: add_valid_aa_dict_asites_labels
+  - override /dataset/get_valid_item@_global_.dataset.get_valid_item: cef
+  - override /dataset/assign_label2x@_global_.dataset.assign_label2x: cef
+  - override /model@_global_.model: ts_catformer
+  - override /model/task_head@_global_.model.task_head: cef
+  - override /routine/loss_weight@_global_.routine.loss_weight: cef_only
+  - override /routine/handlers@_global_.routine.handlers: cef
+  - override /model/complex_encoder@_global_.model.complex_encoder: edge_feat_0
+  - _self_
+
+experiment_name: cef_train
+data:
+  csv:
+    train_csv_path: data/CEF/cef_data_train.csv
+    valid_csv_path: data/CEF/cef_data_valid.csv
+    inference_csv_path: null
+    reaction_csv_path: null
+    substrate_csv_path: null
+    sequence_csv_path: null
+  paths:
+    tmp_dir: data/tmp/cef
+    complex_pocket_folder: data/CEF/pocket
+    protein_only_folder: data/CEF/pocket
+    ligand_folder: data/CEF/out_sdf
+  embedding:
+    save_dir_base: data/tmp/embedding
+    dataset_name: cef
+    sequence_output: sequence_em
+    load_substrate_embedding: false
+    load_product_embedding: false
+    load_sequence_embedding: false
+    load_pocket_embedding: false
+    load_reaction_fp_embedding: false
+    load_reaction_embedding: false
+    fingerprint:
+      rxn_fp_emb_path: null
+      rxn_fp_mask_path: null
+  dataset_mode: complex_only
+run:
+  max_epochs: 100
+  is_train: true
+  batch_size: 6
+optimization:
+  peak_lr: 7.5e-04
+  weight_decay: 1.0e-05
+  warmup_ratio: 0.05
+  end_lr: 1.0e-09
+ts_reaction:
+  selected_key: null
+  filter_valid: false
+checkpoint:
+  path: null
+  mode: weights
+seed:
+  values: [0]
+  deterministic: false
+model:
+  freeze_graphormer: false
+mode:
+  name: cef
+  task: catalytic_energy_fraction
+  flags:
+    if_reload: true
+  monitor:
+    metric: val_cef_loss
+    mode: min
+    filename: cef-best-2511-{epoch:02d}-{val_cef_loss:.4f}

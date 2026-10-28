@@ -1,0 +1,12 @@
+defaults: 
+  - default
+  - merge_sdf_pdb: merge_sdf_pdb_by_rdkit
+  - add_asites_label: noop_add
+  - get_valid_item: energy
+  - assign_label2x: energy
+  - node_featurizer: default
+  - edge_featurizer: default
+  - _self_
+
+_target_: src.dataset.complex_pocket_seq_data.ComplexPocketSeqDataset
+dataset_mode: ${data.dataset_mode}

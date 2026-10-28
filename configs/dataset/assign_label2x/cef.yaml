@@ -1,0 +1,2 @@
+_target_: src.dataset.modules.assign_label.assign_cef_label2x
+_partial_: true

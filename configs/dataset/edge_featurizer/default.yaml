@@ -1,0 +1,25 @@
+
+_target_: src.dataset.utils.gnina_featurizer.PLIPEdgeFeaturizer
+covalent_bond: false
+feat_dim: 1
+interaction_angle: false
+plip_edge_feat_index:
+  - no
+  - hbond
+  - saltbridge
+  - halogenbond
+  - pication
+  - pistack
+  - hydroph_interaction
+plip_node_feat_index:
+  - HACC
+  - HDON
+  - PISTACK
+  - PICATION_RING
+  - PICATION_POS
+  - PICATION_NEG
+  - HYDROPH
+  - SALT_POS
+  - SALT_NEG
+  - XBOND_ACC
+  - XBOND_DON

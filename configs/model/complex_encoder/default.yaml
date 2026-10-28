@@ -1,0 +1,16 @@
+defaults:
+  - get_inter_edge_dense: no_energy
+  - _self_
+_target_: src.model.encoder.encoder.Encoder
+node_feat: ${model.node_feat_size}
+edge_feat: ${model.edge_feat_size}
+hidden_dim: ${model.hidden_dim}
+num_heads: ${model.num_heads}
+intput_dropout_rate: ${model.intput_dropout_rate}
+angle_feat_size: ${model.angle_feat_size}
+K: ${model.rbf_K}
+rbf_cutoff: ${model.rbf_cutoff}
+
+
+
+
